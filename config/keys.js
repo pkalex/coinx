@@ -1,3 +1,5 @@
-module.exports = {
-  mongoURI: "mongodb://akmalu21:Aralogan12358!@ds253879.mlab.com:53879/coinoid"
-};
+if (process.env.NODE_ENV === "production") {
+  module.exports = require("./keys_prod");
+} else {
+  module.exports = require("./keys_dev");
+}
