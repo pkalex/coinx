@@ -84,6 +84,12 @@ class Navbar extends Component {
                   Users
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link className="nav-link" to="/coins">
+                  {" "}
+                  Coins
+                </Link>
+              </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
           </div>
