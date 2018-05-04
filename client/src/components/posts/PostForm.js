@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import TitleAreaFieldGroup from "../common/TitleAreaFieldGroup";
+import CitiesField from "../common/Virtualized";
+
 import { addPost } from "../../actions/postActions";
 
 class PostForm extends Component {
@@ -67,6 +69,7 @@ class PostForm extends Component {
                   onChange={this.onChange}
                   error={errors.text}
                 />
+                <CitiesField />
               </div>
 
               <button type="submit" className="btn btn-dark">

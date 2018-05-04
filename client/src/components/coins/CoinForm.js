@@ -59,7 +59,7 @@ class CoinForm extends Component {
                   onChange={this.onChange}
                   error={errors.title}
                 />
-                <TitleAreaFieldGroup
+                <TextAreaFieldGroup
                   placeholder="Coin ticker"
                   name="ticker"
                   value={this.state.ticker}
