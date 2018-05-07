@@ -22,26 +22,40 @@ class Navbar extends Component {
             Post Feed
           </Link>
         </li>
-        <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
-            Dashboard
-          </Link>
-        </li>
-        <li className="nav-item">
+        <li className="nav-item dropdown">
           <a
-            href=""
-            onClick={this.onLogoutClick.bind(this)}
-            className="nav-link"
+            className="nav-link dropdown-toggle"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
           >
+            {" "}
             <img
               className="rounded-circle"
               src={user.avatar}
               alt={user.name}
               style={{ width: "25px", marginRight: "5px" }}
               title="You must have a Gravatar connected to your email to display an image"
-            />{" "}
-            Logout
+            />
+            {user.name}
           </a>
+          <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+            <Link className="dropdown-item" to="/dashboard">
+              Profile
+            </Link>
+
+            <a
+              href=""
+              onClick={this.onLogoutClick.bind(this)}
+              className="dropdown-item"
+            >
+              {" "}
+              Logout
+            </a>
+          </div>
         </li>
       </ul>
     );
@@ -84,11 +98,28 @@ class Navbar extends Component {
                   Users
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/coins">
-                  {" "}
+              <li className="nav-item dropdown">
+                <a
+                  className="nav-link dropdown-toggle"
+                  href="#"
+                  id="navbarDropdown"
+                  role="button"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
                   Coins
-                </Link>
+                </a>
+                <div className="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <Link className="dropdown-item" to="/coins">
+                    {" "}
+                    Add coin
+                  </Link>
+                  <Link className="dropdown-item" to="/coins">
+                    {" "}
+                    Coin list
+                  </Link>
+                </div>
               </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}

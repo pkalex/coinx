@@ -25,8 +25,8 @@ var CitiesField = createClass({
           simpleValue
           clearable
           name="select-city"
-          value={this.state.selectValue}
-          onChange={this.updateValue}
+          value={this.state.ticker}
+          onChange={this.state.name}
           searchable
           labelKey="name"
           valueKey="name"
