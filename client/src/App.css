@@ -52,3 +52,6 @@ img {
   padding-left: 0.75rem;
   padding-right: 0rem;
 }
+.dropdown-toggle, .nav-link {
+  cursor: pointer;
+}
