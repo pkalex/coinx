@@ -33,6 +33,7 @@ class PostItem extends Component {
     return (
       <div className="card card-body mb-3">
         <div className="row">
+          {/*     Avatar and username
           <div className="col-md-2">
             <a href="profile.html">
               <img
@@ -44,11 +45,8 @@ class PostItem extends Component {
             <br />
             <p className="text-center">{post.name}</p>
           </div>
-          <div className="col-md-10">
-            <h4>
-              <Link to={`/posts/${post._id}`}>{post.title}</Link>
-            </h4>
-            <p className="lead">{post.text}</p>
+        */}
+          <div className="col-md-1">
             {showActions ? (
               <span>
                 <button
@@ -70,6 +68,16 @@ class PostItem extends Component {
                 >
                   <i className="text-secondary fas fa-thumbs-down" />
                 </button>
+              </span>
+            ) : null}
+          </div>
+          <div className="col-md-11">
+            <h4>
+              <Link to={`/post/${post._id}`}>{post.title}</Link>
+            </h4>
+            {showActions ? (
+              <span>
+                <a> posted by {post.name}</a>
                 <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
                   Comments
                 </Link>
