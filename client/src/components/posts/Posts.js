@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import PostForm from './PostForm';
-import PostFeed from './PostFeed';
-import Spinner from '../common/Spinner';
-import { getPosts } from '../../actions/postActions';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import PostForm from "./PostForm";
+import PostFeed from "./PostFeed";
+import PostsSidebar from "./PostsSidebar";
+import Spinner from "../common/Spinner";
+import { getPosts } from "../../actions/postActions";
 
 class Posts extends Component {
   componentDidMount() {
@@ -22,13 +23,12 @@ class Posts extends Component {
     }
 
     return (
-      <div className="feed">
-        <div className="container">
-          <div className="row">
-            <div className="col-md-12">
-              <PostForm />
-              {postContent}
-            </div>
+      <div className="container-fluid">
+        <div className="row">
+          <PostsSidebar />
+          <div className="col-md-9">
+            {postContent}
+            <PostForm />
           </div>
         </div>
       </div>

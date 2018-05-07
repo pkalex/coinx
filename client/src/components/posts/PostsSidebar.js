@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
 
-class ProfileSidebar extends Component {
+class PostsSidebar extends Component {
   render() {
     const { user } = this.props.auth;
 
@@ -60,7 +60,7 @@ class ProfileSidebar extends Component {
   }
 }
 
-ProfileSidebar.propTypes = {
+PostsSidebar.propTypes = {
   auth: PropTypes.object.isRequired
 };
 
@@ -68,4 +68,4 @@ const mapStateToProps = state => ({
   auth: state.auth
 });
 
-export default connect(mapStateToProps)(ProfileSidebar);
+export default connect(mapStateToProps)(PostsSidebar);
