@@ -55,3 +55,6 @@ img {
 .dropdown-toggle {
   cursor: pointer; 
 }
+a#navbarDropdown {
+    cursor: pointer;
+}
