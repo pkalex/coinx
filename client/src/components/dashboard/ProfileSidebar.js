@@ -24,7 +24,6 @@ class ProfileSidebar extends Component {
               title="You must have a Gravatar connected to your email to display an image"
             />
           </div>
-
           <div>
             <a className="username">{user.name}</a>
             <h6 class="my-0">Following 135</h6>

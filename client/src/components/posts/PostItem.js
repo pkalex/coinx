@@ -77,10 +77,11 @@ class PostItem extends Component {
             </h4>
             {showActions ? (
               <span>
-                <a> posted by {post.name}</a>
-                <Link to={`/post/${post._id}`} className="btn btn-info mr-1">
-                  Comments
-                </Link>
+                <a>
+                  {" "}
+                  posted by <b>{post.name} </b>
+                </a>
+                <Link to={`/post/${post._id}`}>Comments</Link>
                 {post.user === auth.user.id ? (
                   <button
                     onClick={this.onDeleteClick.bind(this, post._id)}

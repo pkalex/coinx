@@ -69,6 +69,15 @@ class PostItem extends Component {
               </div>
             </div>
             <div>{post.text}</div>
+            {post.user === auth.user.id ? (
+              <button
+                onClick={this.onDeleteClick.bind(this, post._id)}
+                type="button"
+                className="btn btn-danger mr-1"
+              >
+                <i className="fas fa-times" />
+              </button>
+            ) : null}
           </div>
         </div>
       </div>
