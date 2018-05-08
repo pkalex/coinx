@@ -1,63 +1,40 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import ProfileHeader from "./ProfileHeader";
-import ProfileAbout from "./ProfileAbout";
-import ProfileCreds from "./ProfileCreds";
-import ProfileGithub from "./ProfileGithub";
+import PropTypes from "prop-types";
+import CoinItem from "./CoinItem";
 import Spinner from "../common/Spinner";
-import { getProfileByHandle } from "../../actions/profileActions";
-import ProfileAbout from "./ProfileAbout";
+import { getCoin } from "../../actions/coinActions";
 
-class Profile extends Component {
+class Coin extends Component {
   componentDidMount() {
-    if (this.props.match.params.handle) {
-      this.props.getProfileByHandle(this.props.match.params.handle);
-    }
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.profile.profile === null && this.props.profile.loading) {
-      this.props.history.push("/not-found");
-    }
+    this.props.getCoin(this.props.match.params.id);
   }
 
   render() {
-    const { profile, loading } = this.props.profile;
-    let profileContent;
+    const { coin, loading } = this.props.coin;
+    let coinContent;
 
-    if (profile === null || loading) {
-      profileContent = <Spinner />;
+    if (coin === null || loading || Object.keys(coin).length === 0) {
+      coinContent = <Spinner />;
     } else {
-      profileContent = (
+      coinContent = (
         <div>
-          <div className="row">
-            <div className="col-md-6">
-              <Link to="/profiles" className="btn btn-light mb-3 float-left">
-                Back To Profiles
-              </Link>
-            </div>
-            <div className="col-md-6" />
-          </div>
-          <ProfileHeader profile={profile} />
-          <ProfileAbout profile={profile} />
-          <ProfileCreds
-            education={profile.education}
-            experience={profile.experience}
-          />
-          {profile.githubusername ? (
-            <ProfileGithub username={profile.githubusername} />
-          ) : null}
+          <CoinItem coin={coin} showActions={false} />
         </div>
       );
     }
 
     return (
-      <div className="profile">
+      <div className="coin">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">{profileContent}</div>
+            <div className="col-md-12">
+              <Link to="/coins" className="btn btn-light mb-3">
+                All Coins
+              </Link>
+              {coinContent}
+            </div>
           </div>
         </div>
       </div>
@@ -65,13 +42,13 @@ class Profile extends Component {
   }
 }
 
-Profile.propTypes = {
-  getProfileByHandle: PropTypes.func.isRequired,
-  profile: PropTypes.object.isRequired
+Coin.propTypes = {
+  getCoin: PropTypes.func.isRequired,
+  coin: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  profile: state.profile
+  coin: state.coin
 });
 
-export default connect(mapStateToProps, { getProfileByHandle })(Profile);
+export default connect(mapStateToProps, { getCoin })(Coin);

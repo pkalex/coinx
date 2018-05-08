@@ -7,9 +7,12 @@ const passport = require("passport");
 const Post = require("../../models/Post");
 // Profile model
 const Profile = require("../../models/Profile");
+// Coin model
+var Coin = require("../../models/Coin");
 
 // Validation
 const validatePostInput = require("../../validation/post");
+const validateCommentInput = require("../../validation/comment");
 
 // @route   GET api/posts/test
 // @desc    Tests post route
@@ -53,6 +56,7 @@ router.post(
     }
 
     const newPost = new Post({
+      title: req.body.title,
       text: req.body.text,
       name: req.body.name,
       avatar: req.body.avatar,
@@ -159,7 +163,7 @@ router.post(
   "/comment/:id",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    const { errors, isValid } = validatePostInput(req.body);
+    const { errors, isValid } = validateCommentInput(req.body);
 
     // Check Validation
     if (!isValid) {

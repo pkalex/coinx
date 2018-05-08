@@ -87,4 +87,68 @@ router.delete(
   }
 );
 
+// @route   POST api/coins/like/:id
+// @desc    Like coin
+// @access  Private
+router.post(
+  "/like/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Coin.findById(req.params.id)
+        .then(coin => {
+          if (
+            coin.likes.filter(like => like.user.toString() === req.user.id)
+              .length > 0
+          ) {
+            return res
+              .status(400)
+              .json({ alreadyliked: "User already liked this coin" });
+          }
+
+          // Add user id to likes array
+          coin.likes.unshift({ user: req.user.id });
+
+          coin.save().then(coin => res.json(coin));
+        })
+        .catch(err => res.status(404).json({ coinnotfound: "No coin found" }));
+    });
+  }
+);
+
+// @route   POST api/coins/unlike/:id
+// @desc    Unlike coin
+// @access  Private
+router.post(
+  "/unlike/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOne({ user: req.user.id }).then(profile => {
+      Coin.findById(req.params.id)
+        .then(coin => {
+          if (
+            coin.likes.filter(like => like.user.toString() === req.user.id)
+              .length === 0
+          ) {
+            return res
+              .status(400)
+              .json({ notliked: "You have not yet liked this coin" });
+          }
+
+          // Get remove index
+          const removeIndex = coin.likes
+            .map(item => item.user.toString())
+            .indexOf(req.user.id);
+
+          // Splice out of array
+          coin.likes.splice(removeIndex, 1);
+
+          // Save
+          coin.save().then(coin => res.json(coin));
+        })
+        .catch(err => res.status(404).json({ coinnotfound: "No coin found" }));
+    });
+  }
+);
+
 module.exports = router;

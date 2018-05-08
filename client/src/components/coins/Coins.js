@@ -26,8 +26,8 @@ class Coins extends Component {
         <div className="container">
           <div className="row">
             <div className="col-md-12">
-              <CoinForm />
               {coinContent}
+              <CoinForm />
             </div>
           </div>
         </div>
