@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { deleteCoin } from "../../actions/coinActions";
 
 class CoinItem extends Component {
@@ -16,6 +17,9 @@ class CoinItem extends Component {
         <div className="row">
           <div className="col-md-10">
             <p className="lead">{coin.name}</p>
+            <Link to={`/coin/${coin._id}`}>
+              <p className="lead">{coin.name}</p>
+            </Link>
           </div>
         </div>
       </div>

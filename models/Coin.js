@@ -14,7 +14,15 @@ const CoinSchema = new Schema({
   ticker: {
     type: String,
     required: true
-  }
+  },
+  likes: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
+      }
+    }
+  ]
 });
 
-module.exports = Coin = mongoose.model("coins", CoinSchema);
+module.exports = Coin = mongoose.model("coin", CoinSchema);

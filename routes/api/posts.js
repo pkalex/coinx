@@ -7,6 +7,8 @@ const passport = require("passport");
 const Post = require("../../models/Post");
 // Profile model
 const Profile = require("../../models/Profile");
+// Coin model
+var Coin = require("../../models/Coin");
 
 // Validation
 const validatePostInput = require("../../validation/post");
@@ -54,6 +56,7 @@ router.post(
     }
 
     const newPost = new Post({
+      title: req.body.title,
       text: req.body.text,
       name: req.body.name,
       avatar: req.body.avatar,
