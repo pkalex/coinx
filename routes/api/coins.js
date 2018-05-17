@@ -37,6 +37,26 @@ router.get("/:id", (req, res) => {
     );
 });
 
+// @route   GET api/coin/ticker/:ticker
+// @desc    Get profile by ticker
+// @access  Public
+
+router.get("/ticker/:ticker", (req, res) => {
+  const errors = {};
+
+  Coin.findOne({ ticker: req.params.ticker })
+    .populate("ticker")
+    .then(coin => {
+      if (!coin) {
+        errors.nocoin = "There is no coin for this user";
+        res.status(404).json(errors);
+      }
+
+      res.json(coin);
+    })
+    .catch(err => res.status(404).json(err));
+});
+
 // @route   POST api/coins
 // @desc    Create coin
 // @access  Private

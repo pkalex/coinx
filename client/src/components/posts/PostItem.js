@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deletePost, addLike, removeLike } from "../../actions/postActions";
+import TimeAgo from "timeago-react"; // var TimeAgo = require('timeago-react');
 
 class PostItem extends Component {
   onDeleteClick(id) {
@@ -31,21 +32,8 @@ class PostItem extends Component {
     const { post, auth, showActions } = this.props;
 
     return (
-      <div className="card card-body mb-3">
+      <div className="card card-body mb-3 card-custom">
         <div className="row">
-          {/*     Avatar and username
-          <div className="col-md-2">
-            <a href="profile.html">
-              <img
-                className="rounded-circle d-none d-sm-block"
-                src={post.avatar}
-                alt=""
-              />
-            </a>
-            <br />
-            <p className="text-center">{post.name}</p>
-          </div>
-        */}
           <div className="col-md-1">
             {showActions ? (
               <span>
@@ -79,9 +67,21 @@ class PostItem extends Component {
               <span>
                 <a>
                   {" "}
-                  posted by <b>{post.name} </b>
+                  <b>
+                    <Link to={`/coin/${post.coin}`} className="post-ticker">
+                      {post.coin}
+                    </Link>
+                  </b>{" "}
+                  &nbsp;&nbsp; posted by{" "}
+                  <b>
+                    <Link to={`/profile/${post.name}`}>{post.name}</Link>
+                  </b>{" "}
                 </a>
-                <Link to={`/post/${post._id}`}>Comments</Link>
+                <TimeAgo datetime={post.date} locale="en" />
+                &nbsp;&nbsp;
+                <Link to={`/post/${post._id}`}>
+                  {post.comments.length} Comments
+                </Link>&nbsp;&nbsp;
                 {post.user === auth.user.id ? (
                   <button
                     onClick={this.onDeleteClick.bind(this, post._id)}

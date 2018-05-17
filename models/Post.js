@@ -7,6 +7,10 @@ const PostSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users"
   },
+  coin: {
+    type: String,
+    required: true
+  },
   title: {
     type: String,
     required: true

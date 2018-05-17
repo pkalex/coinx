@@ -47,7 +47,24 @@ export const getCoins = () => dispatch => {
       })
     );
 };
-
+// Get coin by ticker
+export const getCoinByTicker = ticker => dispatch => {
+  dispatch(setCoinLoading());
+  axios
+    .get(`/api/coin/ticker/${ticker}`)
+    .then(res =>
+      dispatch({
+        type: GET_COIN,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_COIN,
+        payload: null
+      })
+    );
+};
 // Get Coin
 export const getCoin = id => dispatch => {
   dispatch(setCoinLoading());

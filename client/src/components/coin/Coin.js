@@ -1,26 +1,41 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import CoinItem from "./CoinItem";
+import { Link } from "react-router-dom";
 import Spinner from "../common/Spinner";
-import { getCoin } from "../../actions/coinActions";
+import { getCoinByTicker } from "../../actions/coinActions";
 
 class Coin extends Component {
   componentDidMount() {
-    this.props.getCoin(this.props.match.params.id);
+    if (this.props.match.params.ticker) {
+      this.props.getCoinByTicker(this.props.match.params.ticker);
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.coin.coin === null && this.props.coin.loading) {
+      this.props.history.push("/not-found");
+    }
   }
 
   render() {
     const { coin, loading } = this.props.coin;
     let coinContent;
 
-    if (coin === null || loading || Object.keys(coin).length === 0) {
+    if (coin === null || loading) {
       coinContent = <Spinner />;
     } else {
       coinContent = (
         <div>
-          <CoinItem coin={coin} showActions={false} />
+          <div className="row">
+            <div className="col-md-6">
+              <Link to="/coins" className="btn btn-light mb-3 float-left">
+                Back To Coins
+              </Link>
+              {coin.ticker}
+            </div>
+            <div className="col-md-6" />
+          </div>
         </div>
       );
     }
@@ -29,12 +44,7 @@ class Coin extends Component {
       <div className="coin">
         <div className="container">
           <div className="row">
-            <div className="col-md-12">
-              <Link to="/coins" className="btn btn-light mb-3">
-                All Coins
-              </Link>
-              {coinContent}
-            </div>
+            <div className="col-md-12">{coinContent}</div>
           </div>
         </div>
       </div>
@@ -43,7 +53,7 @@ class Coin extends Component {
 }
 
 Coin.propTypes = {
-  getCoin: PropTypes.func.isRequired,
+  getCoinByTicker: PropTypes.func.isRequired,
   coin: PropTypes.object.isRequired
 };
 
@@ -51,4 +61,4 @@ const mapStateToProps = state => ({
   coin: state.coin
 });
 
-export default connect(mapStateToProps, { getCoin })(Coin);
+export default connect(mapStateToProps, { getCoinByTicker })(Coin);

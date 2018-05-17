@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import Select from "react-select";
+//import "react-select/dist/react-select.css";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import TitleAreaFieldGroup from "../common/TitleAreaFieldGroup";
-//import CitiesField from "../common/Virtualized";
-
 import { addPost } from "../../actions/postActions";
+import { getCoins } from "../../actions/coinActions";
 
 class PostForm extends Component {
   constructor(props) {
@@ -18,6 +19,10 @@ class PostForm extends Component {
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+  }
+  componentDidMount() {
+    this.props.getCoins();
   }
 
   componentWillReceiveProps(newProps) {
@@ -35,7 +40,8 @@ class PostForm extends Component {
       title: this.state.title,
       text: this.state.text,
       name: user.name,
-      avatar: user.avatar
+      avatar: user.avatar,
+      coin: this.state.selectedOption.ticker
     };
 
     this.props.addPost(newPost);
@@ -44,9 +50,24 @@ class PostForm extends Component {
   onChange(e) {
     this.setState({ [e.target.name]: e.target.value });
   }
-
+  handleChange(selectedOption) {
+    this.setState({
+      selectedOption
+    });
+  }
+  onFormSubmit(formData) {
+    // Dispatch an action
+    console.log(formData);
+  }
   render() {
     const { errors } = this.state;
+
+    let coins = [...this.props.coins];
+    coins = coins.map(coin => {
+      coin.value = coin._id;
+      coin.label = coin.name;
+      return coin;
+    });
 
     return (
       <div className="post-form mb-3">
@@ -69,7 +90,12 @@ class PostForm extends Component {
                   onChange={this.onChange}
                   error={errors.text}
                 />
-                {/* <CitiesField /> */}
+                <Select
+                  name="form-field-name"
+                  value={this.state.selectedOption}
+                  onChange={this.handleChange}
+                  options={coins}
+                />
               </div>
 
               <button type="submit" className="btn btn-dark">
@@ -91,7 +117,8 @@ PostForm.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  errors: state.errors
+  errors: state.errors,
+  coins: state.coin.coins
 });
 
-export default connect(mapStateToProps, { addPost })(PostForm);
+export default connect(mapStateToProps, { addPost, getCoins })(PostForm);

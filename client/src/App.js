@@ -104,7 +104,7 @@ class App extends Component {
               <PrivateRoute exact path="/post/:id" component={Post} />
             </Switch>
             <Switch>
-              <PrivateRoute exact path="/coin/:id" component={Coin} />
+              <PrivateRoute exact path="/coin/:ticker" component={Coin} />
             </Switch>
             <Route exact path="/not-found" component={NotFound} />
             <Footer />

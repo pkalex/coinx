@@ -53,7 +53,18 @@ img {
   padding-right: 0rem;
 }
 .dropdown-toggle {
-  cursor: pointer; 
+  cursor: pointer;
+}
+
+.post-ticker {
+  color: #e87a00;
+}
+
+.card-custom {
+  padding: 0rem;
+  padding-bottom: 0.5rem;
+  border: 0px solid rgba(0, 0, 0, 0.125);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
 }
 a#navbarDropdown {
     cursor: pointer;

@@ -9,8 +9,8 @@ class PostsSidebar extends Component {
 
     return (
       <nav className="col-sm-4 col-md-3 hidden-xs-down sidebar">
-        <li class="d-flex justify-content-between lh-condensed">
-          <div class="sidebar-profile">
+        <li className="d-flex justify-content-between lh-condensed">
+          <div className="sidebar-profile">
             <img
               className="rounded-circle"
               src={user.avatar}
@@ -27,13 +27,13 @@ class PostsSidebar extends Component {
 
           <div>
             <a className="username">{user.name}</a>
-            <h6 class="my-0">Following 135</h6>
-            <h6 class="my-0">Followers 87</h6>
-            <h6 class="my-0">Posts 407</h6>
+            <h6 className="my-0">Following 135</h6>
+            <h6 className="my-0">Followers 87</h6>
+            <h6 className="my-0">Posts 407</h6>
           </div>
         </li>
 
-        <table class="table table-striped">
+        <table className="table table-striped">
           <tbody>
             <tr>
               <th scope="row">BTC</th>
