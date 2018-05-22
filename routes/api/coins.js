@@ -1,7 +1,8 @@
 const express = require("express");
-const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+
+const router = express.Router();
 
 // Coin model
 const Coin = require("../../models/Coin");
@@ -38,14 +39,14 @@ router.get("/:id", (req, res) => {
 });
 
 // @route   GET api/coin/ticker/:ticker
-// @desc    Get profile by ticker
+// @desc    Get coin by ticker
 // @access  Public
 
 router.get("/ticker/:ticker", (req, res) => {
   const errors = {};
 
   Coin.findOne({ ticker: req.params.ticker })
-    .populate("ticker")
+    .populate("coin", ["name", "ticker"])
     .then(coin => {
       if (!coin) {
         errors.nocoin = "There is no coin for this user";

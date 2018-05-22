@@ -51,7 +51,7 @@ export const getCoins = () => dispatch => {
 export const getCoinByTicker = ticker => dispatch => {
   dispatch(setCoinLoading());
   axios
-    .get(`/api/coin/ticker/${ticker}`)
+    .get(`/api/coins/ticker/${ticker}`)
     .then(res =>
       dispatch({
         type: GET_COIN,

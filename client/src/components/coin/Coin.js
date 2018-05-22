@@ -32,7 +32,7 @@ class Coin extends Component {
               <Link to="/coins" className="btn btn-light mb-3 float-left">
                 Back To Coins
               </Link>
-              {coin.ticker}
+              <div>{coin.name}</div>
             </div>
             <div className="col-md-6" />
           </div>

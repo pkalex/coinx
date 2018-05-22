@@ -16,3 +16,4 @@ export const GET_COINS = "GET_COINS";
 export const GET_COIN = "GET_COIN";
 export const ADD_COIN = "ADD_COIN";
 export const DELETE_COIN = "DELETE_COIN";
+export const GET_POSTS_BY_USER = "GET_POSTS_BY_USER";

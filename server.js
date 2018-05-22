@@ -1,3 +1,5 @@
+// File responsible for launching and configuring server, DB
+
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
